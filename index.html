@@ -1,11 +1,89 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>你好，GitHub</title>
-  </head>
-  <body>
-    <h1>覺得厲害</h1>
-  </body>
+<head>
+<title>ダンメモ ダメージ計算ツール</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+<!-- <link rel="icon" href="XG_icon.png" type="image/ico"/> -->
+</head>
+<body bgcolor=dddddd>
+<script>
+
+</script>
+<center>
+<form name=calcutor>
+<table cellspacing=1 border=2>
+<tbody>
+<tr><td colspan=2><center><font color=red><b>
+ref:<a href=https://forum.gamer.com.tw/Co.php?bsn=31981&sn=21899 target=_blank>【心得】傷害計算方式 - 3/11 </a><br>
+</b></font></center></td></tr>
+<tr>
+<td>ステータス</td> <td>スキル</td>
+</tr>
+<tr>
+<td>
+<label for="damage_p">物攻　</label><input id=damage_p name=damage_p value=320 size=3><br>
+魔攻　<input name=damage_m value=320 size=3><br>
+力バフ<input name=buff_p value=0 size=3><br>
+魔バフ<input name=buff_m value=0 size=3><br>
+キラー<input name=killer value=0 size=3><br>
+</td>
+<td>
+タイプ　
+<select name=type <!--onchange="myFunction()"-->>
+	<option value=1 selected>物理
+	<option value=2>魔法
+</select><br>
+対象　　
+<select name=target <!--onchange="myFunction()"-->>
+	<option value=1 selected>単体
+	<option value=2>全体
+	<option value=3>カウンター
+</select><br>
+威力　　
+<select name=power <!--onchange="myFunction()"-->>
+	<option value=1 selected>弱
+	<option value=2>中
+	<option value=3>強
+	<option value=4>超
+	<option value=5>超強
+</select><br>
+発動上昇
+<select name=powerup <!--onchange="myFunction()"-->>
+	<option value=1 selected>無し
+	<option value=2>上昇
+	<option value=3>大上昇
+</select><br>
+</td>
+</tr>
+
+<tr>
+<td><center>バフ/デバフ</center></td>
+<td><center>攻撃発生</center></td>
+</tr>
+
+<tr>
+
+<td>攻撃発生</td>
+<td>
+<input type="checkbox" id="crit" name="crit" value="true">
+<label for="crit">クリティカル</label><br>
+<input type="checkbox" id="guard" name="guard" value="true">
+<label for="guard">ガード</label><br>
+<input type="checkbox" id="pene" name="pene" value="true">
+<label for="pene">ペネトレーション</label><br>
+</td>
+</tr>
+
+<tr>
+<td colspan=2><center>敵ステータス</center></td>
+</tr>
+<tr>
+<td>防御　<input name=e_def value=444 size=3></td>
+<td>耐久デバフ<input name=e_def value=0 size=3></td>
+</tr>
+
+
+</tbody>
+</table>
+</body>
 </html>
 
