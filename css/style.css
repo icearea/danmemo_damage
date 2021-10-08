@@ -109,4 +109,27 @@ select{
 .form-style-1 input[type=checkbox]:hover+label {
 	background-color: #999;
 }
+#result_table {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#result_table td, #result_table th {
+	border: 1px solid #444;
+	padding: 8px;
+}
+
+#result_table tr:nth-child(even){background-color: #aaa;}
+#result_table tr:nth-child(odd){background-color: #888;}
+
+#result_table tr:hover {background-color: #ddd;}
+
+#result_table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #04AA6D;
+	color: white;
+}
 </style>

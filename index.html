@@ -11,27 +11,75 @@ ref:<a href=https://forum.gamer.com.tw/Co.php?bsn=31981&sn=21899 target=_blank>�
 -->
 <script>
 function changeTarget(){
-	var target = document.getElementById("target").value;
-	document.getElementById('power').disabled = target == 'target_counter';
-	document.getElementById('powerup').disabled = target == 'target_counter';
+	var target = document.getElementById("target").value === 'target_counter';
+	document.getElementById('power').disabled = target;
+	document.getElementById('powerup').disabled = target;
+	document.getElementById('affect').disabled = target;
+	document.getElementById('affect_count').disabled = target;
+	
+};
+function damageCalculator() {
+	var atk,buff,debuff;
+	if(document.getElementById("skill_type").value === 'type_p'){
+		atk = document.getElementById("atk_p").value || 0;
+		buff = document.getElementById("buff_p").value || 0;
+		debuff = document.getElementById("debuff_p").value || 0;
+	}
+	else {
+		atk = document.getElementById("atk_m").value || 0;
+		buff = document.getElementById("buff_m").value || 0;
+		debuff = document.getElementById("debuff_m").value || 0;
+	}
+	console.log('atk:'+atk);
+	console.log('buff:'+buff);
+	console.log('debuff:'+debuff);
+	//drawTable([["row 1, cell 1", "row 1, cell 2"], ["row 2, cell 1", "row 2, cell 2"]]);
 }
+function drawTable(tableData) {
+	var table = document.getElementById('result_table');
+	var tableBody = document.createElement('tbody');
+	var random = -4;
+
+	old_tbody = document.getElementById('result_tbody');
+
+	table.style.display = "table";
+	tableBody.id = 'result_tbody';
+
+
+	tableData.forEach(function(rowData) {
+		var row = document.createElement('tr');
+		var cell = document.createElement('td');
+		cell.appendChild(document.createTextNode(random++ + '%'));
+		row.appendChild(cell);
+		rowData.forEach(function(cellData) {
+			var cell = document.createElement('td');
+			cell.appendChild(document.createTextNode(cellData));
+			row.appendChild(cell);
+		});
+
+		tableBody.appendChild(row);
+	});
+
+	old_tbody.parentNode.replaceChild(tableBody, old_tbody)
+}
+
 </script>
-<center>
+
 <form name=calcutor>
 <ul class="form-style-1">
 	<li><label class="field-header">ステータス</label></li>
     <li>
 		<ul>
 			<label for="atk_p">物攻</label>
-			<input type="text" name="atk_p" id="atk_p">
+			<input type="number" name="atk_p" id="atk_p">
 		</ul>
 		<ul>
 			<label for="atk_m">魔攻</label>
-			<input type="text" name="atk_m" id="atk_m">
+			<input type="number" name="atk_m" id="atk_m">
 		</ul>
 		<ul>
 			<label for="killer">キラー</label>
-			<input type="text" name="killer" id="killer">
+			<input type="number" name="killer" id="killer">
 		</ul>
     </li>
 	<li><label class="field-header">スキル</label></li>
@@ -71,9 +119,9 @@ function changeTarget(){
 		</ul>
 		<ul>
 			<label for="affect">効果1つ威力上昇</label>
-			<input type="text" style="width:70px;" name="affect" id="affect">
+			<input type="number" style="width:70px;" name="affect" id="affect">
 			✕
-			<input type="text" style="width:70px;" name="affect_count" id="affect_count">
+			<input type="number" style="width:70px;" name="affect_count" id="affect_count">
 		</ul>
     </li>
 	
@@ -100,75 +148,75 @@ function changeTarget(){
     <li>
 		<ul>
 			<label for="buff_p">力バフ</label>
-			<input type="text" name="buff_p" id="buff_p">
+			<input type="number" name="buff_p" id="buff_p">
 		</ul>
 		<ul>
 			<label for="buff_m">魔バフ</label>
-			<input type="text" name="buff_m" id="buff_m">
+			<input type="number" name="buff_m" id="buff_m">
 		</ul>
 		<ul>
 			<label for="buff_e">属性ダメ</label>
-			<input type="text" name="buff_e" id="buff_e">
+			<input type="number" name="buff_e" id="buff_e">
 		</ul>
 		<ul>
 			<label for="buff_fe">ファミリア属性ダメ</label>
-			<input type="text" name="buff_fe" id="buff_fe">
+			<input type="number" name="buff_fe" id="buff_fe">
 		</ul>
     </li>
 	<li><label class="field-header">デバフ</label></li>
     <li>
 		<ul>
 			<label for="debuff_p">物理耐性</label>
-			<input type="text" name="debuff_p" id="debuff_p">
+			<input type="number" name="debuff_p" id="debuff_p">
 		</ul>
 		<ul>
 			<label for="debuff_m">魔法耐性</label>
-			<input type="text" name="debuff_m" id="debuff_m">
+			<input type="number" name="debuff_m" id="debuff_m">
 		</ul>
 		<ul>
 			<label for="debuff_e">属性耐性</label>
-			<input type="text" name="debuff_e" id="debuff_e">
+			<input type="number" name="debuff_e" id="debuff_e">
 		</ul>
 		<ul>
 			<label for="debuff_st">単体被ダメ</label>
-			<input type="text" name="debuff_st" id="debuff_st">
+			<input type="number" name="debuff_st" id="debuff_st">
 		</ul>
 		<ul>
 			<label for="debuff_sm">全体被ダメ</label>
-			<input type="text" name="debuff_sm" id="debuff_sm">
+			<input type="number" name="debuff_sm" id="debuff_sm">
 		</ul>
     </li>
 	<li><label class="field-header">発展アビリティ</label></li>
     <li>
 		<ul>
 			<label for="ability_pene">ペネX％ダメ上昇</label>
-			<input type="text" name="ability_pene" id="ability_pene">
+			<input type="number" name="ability_pene" id="ability_pene">
 		</ul>
 		<ul>
 			<label for="ability_crit">クリX％ダメ上昇</label>
-			<input type="text" name="ability_crit" id="ability_crit">
+			<input type="number" name="ability_crit" id="ability_crit">
 		</ul>
     </li>
 	<li><label class="field-header">装備革新</label></li>
     <li>
 		<ul>
 			<label for="reform_pene">ペネX％ダメ上昇</label>
-			<input type="text" name="reform_pene" id="reform_pene">
+			<input type="number" name="reform_pene" id="reform_pene">
 		</ul>
 		<ul>
 			<label for="reform_crit">クリX％ダメ上昇</label>
-			<input type="text" name="reform_crit" id="reform_crit">
+			<input type="number" name="reform_crit" id="reform_crit">
 		</ul>
     </li>
 	<li><label class="field-header">敵ステータス</label></li>
     <li>
 		<ul>
 			<label for="enemy_def">防御</label>
-			<input type="text" name="enemy_def" id="enemy_def">
+			<input type="number" name="enemy_def" id="enemy_def" value="100">
 		</ul>
 		<ul>
 			<label for="enemy_def_debuff">耐久デバフ</label>
-			<input type="text" name="enemy_def_debuff" id="enemy_def_debuff">
+			<input type="number" name="enemy_def_debuff" id="enemy_def_debuff">
 		</ul>
     </li>
 	<li><label class="field-header">その他</label></li>
@@ -179,10 +227,24 @@ function changeTarget(){
 		</ul>
     </li>
     <li class="field-submit">
-        <input type="submit" value="計算" />
+        <input type="button" value="計算" onclick=damageCalculator() />
     </li>
 </ul>
 </form>
+<table id="result_table" style="display:none">
+	
+    <thead>
+		<tr>
+            <th >ランダム</th>
+            <th >-</th>
+            <th >クリ</th>
+            <th >ペネ</th>
+            <th >クリペネ</th>
+        </tr>
+    </thead>
+    <tbody id="result_tbody">
+    </tbody>
+</table>
 </body>
 </html>
 
