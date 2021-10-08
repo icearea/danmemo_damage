@@ -2,88 +2,187 @@
 <head>
 <title>ダンメモ ダメージ計算ツール</title>
 <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
-<!-- <link rel="icon" href="XG_icon.png" type="image/ico"/> -->
+<link rel="icon" href="icon.png" type="image/ico"/>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
-<body bgcolor=dddddd>
+<body bgcolor=36393F>
+<!-- 
+ref:<a href=https://forum.gamer.com.tw/Co.php?bsn=31981&sn=21899 target=_blank>【心得】傷害計算方式 - 3/11 </a>
+-->
 <script>
-
+function changeTarget(){
+	var target = document.getElementById("target").value;
+	document.getElementById('power').disabled = target == 'target_counter';
+	document.getElementById('powerup').disabled = target == 'target_counter';
+}
 </script>
 <center>
 <form name=calcutor>
-<table cellspacing=1 border=2>
-<tbody>
-<tr><td colspan=2><center><font color=red><b>
-ref:<a href=https://forum.gamer.com.tw/Co.php?bsn=31981&sn=21899 target=_blank>【心得】傷害計算方式 - 3/11 </a><br>
-</b></font></center></td></tr>
-<tr>
-<td>ステータス</td> <td>スキル</td>
-</tr>
-<tr>
-<td>
-<label for="damage_p">物攻　</label><input id=damage_p name=damage_p value=320 size=3><br>
-魔攻　<input name=damage_m value=320 size=3><br>
-力バフ<input name=buff_p value=0 size=3><br>
-魔バフ<input name=buff_m value=0 size=3><br>
-キラー<input name=killer value=0 size=3><br>
-</td>
-<td>
-タイプ　
-<select name=type <!--onchange="myFunction()"-->>
-	<option value=1 selected>物理
-	<option value=2>魔法
-</select><br>
-対象　　
-<select name=target <!--onchange="myFunction()"-->>
-	<option value=1 selected>単体
-	<option value=2>全体
-	<option value=3>カウンター
-</select><br>
-威力　　
-<select name=power <!--onchange="myFunction()"-->>
-	<option value=1 selected>弱
-	<option value=2>中
-	<option value=3>強
-	<option value=4>超
-	<option value=5>超強
-</select><br>
-発動上昇
-<select name=powerup <!--onchange="myFunction()"-->>
-	<option value=1 selected>無し
-	<option value=2>上昇
-	<option value=3>大上昇
-</select><br>
-</td>
-</tr>
-
-<tr>
-<td><center>バフ/デバフ</center></td>
-<td><center>攻撃発生</center></td>
-</tr>
-
-<tr>
-
-<td>攻撃発生</td>
-<td>
-<input type="checkbox" id="crit" name="crit" value="true">
-<label for="crit">クリティカル</label><br>
-<input type="checkbox" id="guard" name="guard" value="true">
-<label for="guard">ガード</label><br>
-<input type="checkbox" id="pene" name="pene" value="true">
-<label for="pene">ペネトレーション</label><br>
-</td>
-</tr>
-
-<tr>
-<td colspan=2><center>敵ステータス</center></td>
-</tr>
-<tr>
-<td>防御　<input name=e_def value=444 size=3></td>
-<td>耐久デバフ<input name=e_def value=0 size=3></td>
-</tr>
-
-
-</tbody>
-</table>
+<ul class="form-style-1">
+	<li><label class="field-header">ステータス</label></li>
+    <li>
+		<ul>
+			<label for="atk_p">物攻</label>
+			<input type="text" name="atk_p" id="atk_p">
+		</ul>
+		<ul>
+			<label for="atk_m">魔攻</label>
+			<input type="text" name="atk_m" id="atk_m">
+		</ul>
+		<ul>
+			<label for="killer">キラー</label>
+			<input type="text" name="killer" id="killer">
+		</ul>
+    </li>
+	<li><label class="field-header">スキル</label></li>
+    <li>
+		<ul>
+			<label for="skill_type">タイプ</label>
+			<select class="field-select" name="skill_type" id="skill_type">
+				<option value="type_p" selected="true" id="skill_type-0">物理</option>
+				<option value="type_m" id="skill_type-1">魔法</option>
+			</select>
+		</ul>
+		<ul>
+			<label for="target">対象</label>
+			<select class="field-select" name="target" id="target" onchange=changeTarget()>
+				<option value="target_single" selected="true" id="target-0">単体</option>
+				<option value="target_multi" id="target-1">全体</option>
+				<option value="target_counter" id="target-2">カウンター</option>
+			</select>
+		</ul>
+		<ul>
+			<label for="power">威力</label>
+			<select class="field-select" name="power" id="power">
+				<option value="power_1" selected="true" id="power-0">弱</option>
+				<option value="power_2" id="power-1">中</option>
+				<option value="power_3" id="power-2">強</option>
+				<option value="power_4" id="power-3">超</option>
+				<option value="power_5" id="power-4">超強</option>
+			</select>
+		</ul>
+		<ul>
+			<label for="powerup">発動上昇</label>
+			<select class="field-select" name="powerup" id="powerup">
+				<option value="powerup_1" selected="true" id="powerup-0">無し</option>
+				<option value="powerup_2" id="powerup-1">上昇</option>
+				<option value="powerup_3" id="powerup-2">大上昇</option>
+			</select>
+		</ul>
+		<ul>
+			<label for="affect">効果1つ威力上昇</label>
+			<input type="text" style="width:70px;" name="affect" id="affect">
+			✕
+			<input type="text" style="width:70px;" name="affect_count" id="affect_count">
+		</ul>
+    </li>
+	
+	<li><label class="field-header">攻撃イベント</label></li>
+	<li>
+		<ul>
+			<label for="combo">必殺Combo</label>
+			<select class="field-select" name="combo" id="combo">
+				<option value="combo_0" selected="true" id="combo-0">無し</option>
+				<option value="combo_1" id="combo-1">1</option>
+				<option value="combo_2" id="combo-2">2</option>
+				<option value="combo_3" id="combo-1">3</option>
+				<option value="combo_4" id="combo-2">4</option>
+			</select>
+		</ul>
+		<input name="atk_event[]" id="atk_event-0" value="atk_event_crit" type="checkbox">
+		<label for="atk_event-0">クリティカル</label>
+		<input name="atk_event[]" id="atk_event-1" value="atk_event_pene" type="checkbox">
+		<label for="atk_event-1">ペネトレーション</label>
+		<input name="atk_event[]" id="atk_event-2" value="atk_event_guard" type="checkbox">
+		<label for="atk_event-2">ガード</label>
+    </li>
+	<li><label class="field-header">バフ</label></li>
+    <li>
+		<ul>
+			<label for="buff_p">力バフ</label>
+			<input type="text" name="buff_p" id="buff_p">
+		</ul>
+		<ul>
+			<label for="buff_m">魔バフ</label>
+			<input type="text" name="buff_m" id="buff_m">
+		</ul>
+		<ul>
+			<label for="buff_e">属性ダメ</label>
+			<input type="text" name="buff_e" id="buff_e">
+		</ul>
+		<ul>
+			<label for="buff_fe">ファミリア属性ダメ</label>
+			<input type="text" name="buff_fe" id="buff_fe">
+		</ul>
+    </li>
+	<li><label class="field-header">デバフ</label></li>
+    <li>
+		<ul>
+			<label for="debuff_p">物理耐性</label>
+			<input type="text" name="debuff_p" id="debuff_p">
+		</ul>
+		<ul>
+			<label for="debuff_m">魔法耐性</label>
+			<input type="text" name="debuff_m" id="debuff_m">
+		</ul>
+		<ul>
+			<label for="debuff_e">属性耐性</label>
+			<input type="text" name="debuff_e" id="debuff_e">
+		</ul>
+		<ul>
+			<label for="debuff_st">単体被ダメ</label>
+			<input type="text" name="debuff_st" id="debuff_st">
+		</ul>
+		<ul>
+			<label for="debuff_sm">全体被ダメ</label>
+			<input type="text" name="debuff_sm" id="debuff_sm">
+		</ul>
+    </li>
+	<li><label class="field-header">発展アビリティ</label></li>
+    <li>
+		<ul>
+			<label for="ability_pene">ペネX％ダメ上昇</label>
+			<input type="text" name="ability_pene" id="ability_pene">
+		</ul>
+		<ul>
+			<label for="ability_crit">クリX％ダメ上昇</label>
+			<input type="text" name="ability_crit" id="ability_crit">
+		</ul>
+    </li>
+	<li><label class="field-header">装備革新</label></li>
+    <li>
+		<ul>
+			<label for="reform_pene">ペネX％ダメ上昇</label>
+			<input type="text" name="reform_pene" id="reform_pene">
+		</ul>
+		<ul>
+			<label for="reform_crit">クリX％ダメ上昇</label>
+			<input type="text" name="reform_crit" id="reform_crit">
+		</ul>
+    </li>
+	<li><label class="field-header">敵ステータス</label></li>
+    <li>
+		<ul>
+			<label for="enemy_def">防御</label>
+			<input type="text" name="enemy_def" id="enemy_def">
+		</ul>
+		<ul>
+			<label for="enemy_def_debuff">耐久デバフ</label>
+			<input type="text" name="enemy_def_debuff" id="enemy_def_debuff">
+		</ul>
+    </li>
+	<li><label class="field-header">その他</label></li>
+	<li>
+		<ul>
+		<input name="specila_event[]" id="specila_event-0" value="specila_event_0" type="checkbox">
+		<label for="specila_event-0">三年目バレンタインデー以降キャラ</label>
+		</ul>
+    </li>
+    <li class="field-submit">
+        <input type="submit" value="計算" />
+    </li>
+</ul>
+</form>
 </body>
 </html>
 
